@@ -1,0 +1,3 @@
+import { connectDB } from '@/lib/db'; import Enrollment from '@/models/Enrollment'; import { memory, addItem } from '@/lib/store'; import { ok, fail } from '@/lib/apiResponse'; import { verifyAdmin } from '@/lib/auth'
+export async function GET(){ if(!verifyAdmin()) return fail('Unauthorized',401); const db=await connectDB(); if(db){ const enrollments=await Enrollment.find({}).sort({createdAt:-1}).lean(); return ok({enrollments}) } return ok({enrollments:memory.enrollments}) }
+export async function POST(req){ const data=await req.json(); const db=await connectDB(); if(db){ const enrollment=await Enrollment.create(data); return ok({enrollment}) } return ok({enrollment:addItem('enrollments', data)}) }

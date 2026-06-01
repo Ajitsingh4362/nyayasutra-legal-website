@@ -1,0 +1,3 @@
+import { connectDB } from '@/lib/db'; import Gallery from '@/models/Gallery'; import { memory, addItem } from '@/lib/store'; import { ok, fail } from '@/lib/apiResponse'; import { verifyAdmin } from '@/lib/auth'
+export async function GET(){ const db=await connectDB(); if(db){ const gallery=await Gallery.find({}).sort({createdAt:-1}).lean(); return ok({gallery}) } return ok({gallery:memory.gallery}) }
+export async function POST(req){ if(!verifyAdmin()) return fail('Unauthorized',401); const data=await req.json(); const db=await connectDB(); if(db){ const media=await Gallery.create(data); return ok({media}) } return ok({media:addItem('gallery', data)}) }

@@ -1,0 +1,3 @@
+import { MessageCircle } from 'lucide-react'
+import { waLink } from '@/lib/constants'
+export default function CTA({title='Need Legal Assistance?', text='Connect with NyayaSutra for consultation, drafting, research and legal guidance.'}){ return <section className="py-10"><div className="container card flex flex-col items-start justify-between gap-5 p-8 md:flex-row md:items-center"><div><h2 className="font-display text-3xl gold-text">{title}</h2><p className="mt-2 text-ivory/75">{text}</p></div><a className="btn-gold" href={waLink('Hello NyayaSutra, I need legal assistance.')} target="_blank"><MessageCircle size={18}/> Chat on WhatsApp</a></div></section> }

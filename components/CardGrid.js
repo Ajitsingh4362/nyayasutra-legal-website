@@ -1,0 +1,1 @@
+export default function CardGrid({items=[]}){ return <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map((it,i)=><div key={i} className="card p-6"><h3 className="font-display text-2xl gold-text">{Array.isArray(it)?it[0]:it.title}</h3><p className="mt-3 text-sm leading-7 text-ivory/75">{Array.isArray(it)?it[1]:it.text}</p></div>)}</div> }

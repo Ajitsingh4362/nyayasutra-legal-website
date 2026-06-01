@@ -1,0 +1,2 @@
+import PageHero from '@/components/PageHero'; import CardGrid from '@/components/CardGrid'; import CTA from '@/components/CTA'; import { practiceAreas } from '@/lib/constants'
+export default function PracticeAreas(){ return <main><PageHero title="Our Practice Areas" text="Structured litigation-oriented legal support for Supreme Court, High Courts, District Courts, corporate, arbitration, constitutional and criminal matters."/><section className="section"><div className="container"><CardGrid items={practiceAreas}/></div></section><CTA/></main> }

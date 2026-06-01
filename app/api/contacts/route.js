@@ -1,0 +1,3 @@
+import { connectDB } from '@/lib/db'; import Contact from '@/models/Contact'; import { memory, addItem } from '@/lib/store'; import { ok, fail } from '@/lib/apiResponse'; import { verifyAdmin } from '@/lib/auth'
+export async function GET(){ if(!verifyAdmin()) return fail('Unauthorized',401); const db=await connectDB(); if(db){ const contacts=await Contact.find({}).sort({createdAt:-1}).lean(); return ok({contacts}) } return ok({contacts:memory.contacts}) }
+export async function POST(req){ const data=await req.json(); const db=await connectDB(); if(db){ const contact=await Contact.create(data); return ok({contact}) } return ok({contact:addItem('contacts', data)}) }

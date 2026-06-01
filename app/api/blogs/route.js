@@ -1,0 +1,3 @@
+import { connectDB } from '@/lib/db'; import Blog from '@/models/Blog'; import { memory, addItem } from '@/lib/store'; import { slugify } from '@/lib/slug'; import { ok, fail } from '@/lib/apiResponse'; import { verifyAdmin } from '@/lib/auth'
+export async function GET(){ const db=await connectDB(); if(db){ const blogs=await Blog.find({}).sort({createdAt:-1}).lean(); return ok({blogs}) } return ok({blogs:memory.blogs}) }
+export async function POST(req){ if(!verifyAdmin()) return fail('Unauthorized',401); const data=await req.json(); data.slug=data.slug||slugify(data.title); const db=await connectDB(); if(db){ const blog=await Blog.create(data); return ok({blog}) } return ok({blog:addItem('blogs', data)}) }

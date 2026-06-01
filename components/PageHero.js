@@ -1,0 +1,1 @@
+export default function PageHero({kicker='NyayaSutra', title, text}){ return <section className="section bg-navy-900/60"><div className="container"><p className="section-kicker">{kicker}</p><h1 className="section-title mt-3 max-w-4xl">{title}</h1>{text&&<p className="mt-5 max-w-3xl text-lg leading-8 text-ivory/75">{text}</p>}</div></section> }
